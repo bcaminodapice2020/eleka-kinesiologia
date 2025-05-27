@@ -1,0 +1,6 @@
+git init
+git remote add origin https://github.com/bcaminodapice2020/eleka-kinesiologia.git
+git branch -M main
+git add .
+git commit -m "Primera versión de la web"
+git push -u origin main
