@@ -58,15 +58,25 @@ form{
     gap: 10px;
     max-width: 500px;
     margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
 
 }
 
 input,textarea,button{
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #999; 
     border-radius: 5px;
-
 }
+
+input:hover, textarea:hover {
+  border-color: #0077b6;
+  outline: none;
+}
+
 
 button{
     background-color: #0077b6;
