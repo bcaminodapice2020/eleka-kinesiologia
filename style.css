@@ -20,24 +20,32 @@ header{
 }
 
 nav{
-    background-color: #023e8a;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #023e8a;
     padding: 10px 0;
 }
 
-@media screen and (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: center;
-  }
+@media (min-width: 768px) {
+    nav {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    nav a {
+        display: inline;
+        margin: 0 15px;
+    }
+}
 
   nav a {
-    display: block;
-    width: 100%;
+  color: white; 
+    text-decoration: none; 
+    font-weight: bold; 
+    display: block;  
+    padding: 10px 0; 
     text-align: center;
-    padding: 12px 0;
-    border-top: 1px solid #ffffff30;
   }
 }
 nav a: :hover{
