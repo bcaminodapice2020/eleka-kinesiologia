@@ -10,8 +10,8 @@ formulario.addEventListener("submit", function (event) {
 
   const partesFecha = fecha.split("-");
   const fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
-  const horaSeleccionada = fechaSeleccionada.getHours();
-  const minutosSeleccionados = fechaSeleccionada.getMinutes();
+  const horaSeleccionada = fechaFormateada.getHours();
+  const minutosSeleccionados = fechaFormateada.getMinutes();
 
   const dentroHorarioManiana = (horaSeleccionada >= 8 && horaSeleccionada < 13);
   const dentroHorarioTarde = (horaSeleccionada >= 14 && horaSeleccionada < 20);
