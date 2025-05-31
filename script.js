@@ -8,8 +8,8 @@ formulario.addEventListener("submit", function (event) {
   const fecha = document.getElementById("fecha").value;
   const hora = document.getElementById("hora").value;
 
-  const fechaSeleccionada = new Date(`${fecha}T${hora}`);
-  const dia = fechaSeleccionada.getDay(); // 0 = domingo, 6 = sábado
+  const partesFecha = fecha.split("-");
+  const fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
   const horaSeleccionada = fechaSeleccionada.getHours();
   const minutosSeleccionados = fechaSeleccionada.getMinutes();
 
@@ -34,7 +34,7 @@ formulario.addEventListener("submit", function (event) {
     return;
   }
 
-  mensaje.innerHTML = `Gracias <strong>${nombre}</strong>, tu turno fue agendado para el <strong>${fecha}</strong> a las <strong>${hora}</strong>.`;
+  mensaje.innerHTML = `Gracias <strong>${nombre}</strong>, tu turno fue agendado para el <strong>${fechaFormateada}</strong> a las <strong>${hora}</strong>.`;
   mensaje.style.display = "block";
   mensaje.style.backgroundColor = "#d4edda";
   mensaje.style.color = "#155724";
