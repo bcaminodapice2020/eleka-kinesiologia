@@ -8,10 +8,9 @@ formulario.addEventListener("submit", function (event) {
   const nombre = document.getElementById("nombre").value;
   const fecha = document.getElementById("fecha").value;
   const hora = document.getElementById("hora").value;
-
   
   mensaje.innerHTML = `Gracias <strong>${nombre}</strong>, tu turno fue agendado para el <strong>${fecha}</strong> a las <strong>${hora}</strong>.`;
-  mensaje.style.color = "green";
+  mensaje.style.display = "block";
   mensaje.style.marginTop = "15px";
   mensaje.style.fontWeight = "bold";
 
