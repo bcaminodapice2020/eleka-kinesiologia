@@ -1,61 +1,56 @@
-const formulario = document.getElementById("form-turno");
-const mensaje = document.getElementById("mensaje-confirmacion");
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("form-turno");
+    const mensaje = document.getElementById("mensaje-confirmacion");
 
-formulario.addEventListener("submit", function (event) {
-  event.preventDefault();
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-  const nombre = document.getElementById("nombre").value;
-  const fecha = document.getElementById("fecha").value;
-  const hora = document.getElementById("hora").value;
+        const nombre = document.getElementById("nombre").value;
+        const fecha = document.getElementById("fecha").value;
+        const hora = document.getElementById("hora").value;
 
-  
-  if (!nombre || !fecha || !hora) {
-    mensaje.innerHTML = "⚠️ Por favor completá todos los campos.";
-    mensaje.style.display = "block";
-    mensaje.style.backgroundColor = "#f8d7da";
-    mensaje.style.color = "#721c24";
-    mensaje.style.border = "1px solid #f5c6cb";
-    return;
-  }
+        const fechaSeleccionada = new Date(fecha);
+        const diaSemana = fechaSeleccionada.getDay(); // 0: Domingo, 6: Sábado
 
+        const [horaSeleccionada, minutosSeleccionados] = hora.split(":").map(Number);
+        const minutosTotales = horaSeleccionada * 60 + minutosSeleccionados;
 
-  const fechaYHora = new Date(`${fecha}T${hora}`);
+        
+        const mañanaInicio = 8 * 60;
+        const mañanaFin = 13 * 60;
+        const tardeInicio = 14 * 60;
+        const tardeFin = 20 * 60;
 
-  const dia = fechaYHora.getDay(); // 0 (domingo) a 6 (sábado)
-  const horaSeleccionada = fechaYHora.getHours();
-  const minutosSeleccionados = fechaYHora.getMinutes();
+        
+        mensaje.innerText = "";
+        mensaje.style.display = "none";
 
-  
-  if (dia === 0 || dia === 6) {
-    mensaje.innerHTML = "⚠️ Sólo se pueden reservar turnos de lunes a viernes.";
-    mensaje.style.display = "block";
-    mensaje.style.backgroundColor = "#f8d7da";
-    mensaje.style.color = "#721c24";
-    mensaje.style.border = "1px solid #f5c6cb";
-    return;
-  }
+        
+        if (diaSemana === 0 || diaSemana === 6) {
+            mostrarMensaje("El consultorio está cerrado los fines de semana.", false);
+            return;
+        }
 
-  const dentroHorarioManiana = horaSeleccionada >= 8 && horaSeleccionada < 13;
-  const dentroHorarioTarde = horaSeleccionada >= 14 && horaSeleccionada < 20;
+        if (!((minutosTotales >= mañanaInicio && minutosTotales < mañanaFin) ||
+              (minutosTotales >= tardeInicio && minutosTotales <= tardeFin))) {
+            mostrarMensaje("El horario seleccionado está fuera del horario de atención (08:00–13:00 y 14:00–20:00).", false);
+            return;
+        }
 
-  if (!dentroHorarioManiana && !dentroHorarioTarde) {
-    mensaje.innerHTML = "⚠️ El horario debe estar entre las 8:00 y las 13:00 o entre las 14:00 y las 20:00.";
-    mensaje.style.display = "block";
-    mensaje.style.backgroundColor = "#f8d7da";
-    mensaje.style.color = "#721c24";
-    mensaje.style.border = "1px solid #f5c6cb";
-    return;
-  }
+        const mensajeTexto = `¡Turno reservado con éxito para ${nombre} el ${fecha} a las ${hora} hs!`;
+        mostrarMensaje(mensajeTexto, true);
 
-  
-  const partesFecha = fecha.split("-");
-  const fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
+        form.reset();
+    });
 
-  mensaje.innerHTML = `Gracias <strong>${nombre}</strong>, tu turno fue agendado para el <strong>${fechaFormateada}</strong> a las <strong>${hora}</strong>.`;
-  mensaje.style.display = "block";
-  mensaje.style.backgroundColor = "#d4edda";
-  mensaje.style.color = "#155724";
-  mensaje.style.border = "1px solid #c3e6cb";
-
-  formulario.reset();
+    function mostrarMensaje(texto, esExito) {
+        mensaje.innerText = texto;
+        mensaje.style.display = "block";
+        mensaje.style.backgroundColor = esExito ? "#d4edda" : "#f8d7da";
+        mensaje.style.color = esExito ? "#155724" : "#721c24";
+        mensaje.style.border = esExito ? "1px solid #c3e6cb" : "1px solid #f5c6cb";
+        mensaje.style.padding = "10px";
+        mensaje.style.marginTop = "10px";
+        mensaje.style.borderRadius = "5px";
+    }
 });
