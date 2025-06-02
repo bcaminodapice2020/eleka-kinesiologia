@@ -8,14 +8,24 @@ formulario.addEventListener("submit", function (event) {
   const fecha = document.getElementById("fecha").value;
   const hora = document.getElementById("hora").value;
 
-  const partesFecha = fecha.split("-");
-  const fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
-  const horaSeleccionada = fechaFormateada.getHours();
-  const minutosSeleccionados = fechaFormateada.getMinutes();
+  
+  if (!nombre || !fecha || !hora) {
+    mensaje.innerHTML = "⚠️ Por favor completá todos los campos.";
+    mensaje.style.display = "block";
+    mensaje.style.backgroundColor = "#f8d7da";
+    mensaje.style.color = "#721c24";
+    mensaje.style.border = "1px solid #f5c6cb";
+    return;
+  }
 
-  const dentroHorarioManiana = (horaSeleccionada >= 8 && horaSeleccionada < 13);
-  const dentroHorarioTarde = (horaSeleccionada >= 14 && horaSeleccionada < 20);
 
+  const fechaYHora = new Date(`${fecha}T${hora}`);
+
+  const dia = fechaYHora.getDay(); // 0 (domingo) a 6 (sábado)
+  const horaSeleccionada = fechaYHora.getHours();
+  const minutosSeleccionados = fechaYHora.getMinutes();
+
+  
   if (dia === 0 || dia === 6) {
     mensaje.innerHTML = "⚠️ Sólo se pueden reservar turnos de lunes a viernes.";
     mensaje.style.display = "block";
@@ -25,6 +35,9 @@ formulario.addEventListener("submit", function (event) {
     return;
   }
 
+  const dentroHorarioManiana = horaSeleccionada >= 8 && horaSeleccionada < 13;
+  const dentroHorarioTarde = horaSeleccionada >= 14 && horaSeleccionada < 20;
+
   if (!dentroHorarioManiana && !dentroHorarioTarde) {
     mensaje.innerHTML = "⚠️ El horario debe estar entre las 8:00 y las 13:00 o entre las 14:00 y las 20:00.";
     mensaje.style.display = "block";
@@ -33,6 +46,10 @@ formulario.addEventListener("submit", function (event) {
     mensaje.style.border = "1px solid #f5c6cb";
     return;
   }
+
+  
+  const partesFecha = fecha.split("-");
+  const fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
 
   mensaje.innerHTML = `Gracias <strong>${nombre}</strong>, tu turno fue agendado para el <strong>${fechaFormateada}</strong> a las <strong>${hora}</strong>.`;
   mensaje.style.display = "block";
