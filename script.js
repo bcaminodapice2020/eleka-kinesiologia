@@ -30,6 +30,7 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
     if (diaSemana === 0 || diaSemana === 6) {
         mensajeDiv.textContent = "El consultorio está cerrado los fines de semana.";
         mensajeDiv.className = "error";
+        mensajeDiv.style.display = "block";
         return;
     }
 
