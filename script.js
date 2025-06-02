@@ -1,56 +1,55 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("form-turno");
-    const mensaje = document.getElementById("mensaje-confirmacion");
+document.getElementById("form-turno").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
+    const nombre = document.getElementById("nombre").value;
+    const email = document.getElementById("email").value;
+    const fechaInput = document.getElementById("fecha").value;
+    const hora = document.getElementById("hora").value;
+    const mensajeDiv = document.getElementById("mensaje-confirmacion");
 
-        const nombre = document.getElementById("nombre").value;
-        const fecha = document.getElementById("fecha").value;
-        const hora = document.getElementById("hora").value;
+    mensajeDiv.innerHTML = "";
+    mensajeDiv.className = "";
 
-        const fechaSeleccionada = new Date(fecha);
-        const diaSemana = fechaSeleccionada.getDay(); // 0: Domingo, 6: Sábado
-
-        const [horaSeleccionada, minutosSeleccionados] = hora.split(":").map(Number);
-        const minutosTotales = horaSeleccionada * 60 + minutosSeleccionados;
-
-        
-        const mañanaInicio = 8 * 60;
-        const mañanaFin = 13 * 60;
-        const tardeInicio = 14 * 60;
-        const tardeFin = 20 * 60;
-
-        
-        mensaje.innerText = "";
-        mensaje.style.display = "none";
-
-        
-        if (diaSemana === 0 || diaSemana === 6) {
-            mostrarMensaje("El consultorio está cerrado los fines de semana.", false);
-            return;
-        }
-
-        if (!((minutosTotales >= mañanaInicio && minutosTotales < mañanaFin) ||
-              (minutosTotales >= tardeInicio && minutosTotales <= tardeFin))) {
-            mostrarMensaje("El horario seleccionado está fuera del horario de atención (08:00–13:00 y 14:00–20:00).", false);
-            return;
-        }
-
-        const mensajeTexto = `¡Turno reservado con éxito para ${nombre} el ${fecha} a las ${hora} hs!`;
-        mostrarMensaje(mensajeTexto, true);
-
-        form.reset();
-    });
-
-    function mostrarMensaje(texto, esExito) {
-        mensaje.innerText = texto;
-        mensaje.style.display = "block";
-        mensaje.style.backgroundColor = esExito ? "#d4edda" : "#f8d7da";
-        mensaje.style.color = esExito ? "#155724" : "#721c24";
-        mensaje.style.border = esExito ? "1px solid #c3e6cb" : "1px solid #f5c6cb";
-        mensaje.style.padding = "10px";
-        mensaje.style.marginTop = "10px";
-        mensaje.style.borderRadius = "5px";
+    if (!fechaInput || !hora || !nombre || !email) {
+        mensajeDiv.textContent = "Por favor, completá todos los campos.";
+        mensajeDiv.className = "error";
+        return;
     }
+
+    const fechaSeleccionada = new Date(`${fechaInput}T${hora}`);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0); 
+
+    if (fechaSeleccionada < hoy) {
+        mensajeDiv.textContent = "La fecha seleccionada ya pasó. Por favor, elegí una fecha futura.";
+        mensajeDiv.className = "error";
+        return;
+    }
+
+    const diaSemana = fechaSeleccionada.getDay(); // 0 (domingo) a 6 (sábado)
+    const horaSeleccionada = parseInt(hora.split(":")[0]);
+    const minutos = parseInt(hora.split(":")[1]);
+
+    if (diaSemana === 0 || diaSemana === 6) {
+        mensajeDiv.textContent = "El consultorio está cerrado los fines de semana.";
+        mensajeDiv.className = "error";
+        return;
+    }
+
+    const horaDecimal = horaSeleccionada + minutos / 60;
+    if (horaDecimal < 8 || (horaDecimal >= 13 && horaDecimal < 14) || horaDecimal >= 20) {
+        mensajeDiv.textContent = "El consultorio solo atiende de 8:00 a 13:00 y de 14:00 a 20:00.";
+        mensajeDiv.className = "error";
+        return;
+    }
+
+    
+    const dia = fechaSeleccionada.getDate().toString().padStart(2, '0');
+    const mes = (fechaSeleccionada.getMonth() + 1).toString().padStart(2, '0');
+    const año = fechaSeleccionada.getFullYear();
+
+    mensajeDiv.innerHTML = `¡Hola ${nombre}, tu turno ha sido reservado exitosamente para el <strong>${dia}/${mes}/${año}</strong> a las <strong>${hora}</strong> hs!`;
+    mensajeDiv.className = "exito";
+
+    document.getElementById("form-turno").reset();
 });
