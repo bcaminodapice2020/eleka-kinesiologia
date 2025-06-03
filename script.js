@@ -43,7 +43,7 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
         return;
     }
 
-    
+  
     const dia = fechaSeleccionada.getDate().toString().padStart(2, '0');
     const mes = (fechaSeleccionada.getMonth() + 1).toString().padStart(2, '0');
     const año = fechaSeleccionada.getFullYear();
