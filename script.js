@@ -1,18 +1,19 @@
 document.getElementById("form-turno").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const nombre = document.getElementById("nombre").value;
-    const email = document.getElementById("email").value;
+    const nombre = document.getElementById("nombre").value.trim();
+    const email = document.getElementById("email").value.trim();
     const fechaInput = document.getElementById("fecha").value;
     const hora = document.getElementById("hora").value;
     const mensajeDiv = document.getElementById("mensaje-confirmacion");
 
     mensajeDiv.innerHTML = "";
     mensajeDiv.className = "";
+    mensajeDiv.style.display = "block";
 
     if (!fechaInput || !hora || !nombre || !email) {
         mensajeDiv.textContent = "Por favor, completá todos los campos.";
-        mensajeDiv.className = "error";
+        mensajeDiv.classList.add("error");
         return;
     }
 
@@ -22,25 +23,23 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
 
     if (fechaSeleccionada < hoy) {
         mensajeDiv.textContent = "La fecha seleccionada ya pasó. Por favor, elegí una fecha futura.";
-        mensajeDiv.className = "error";
+        mensajeDiv.classList.add("error");
         return;
     }
 
     const diaSemana = fechaSeleccionada.getDay(); 
     if (diaSemana === 0 || diaSemana === 6) {
         mensajeDiv.textContent = "El consultorio está cerrado los fines de semana.";
-        mensajeDiv.className = "error";
-        mensajeDiv.style.display = "block";
+        mensajeDiv.classList.add("error");
         return;
     }
 
-    const horaSeleccionada = parseInt(hora.split(":")[0]);
-    const minutos = parseInt(hora.split(":")[1]);
+    const [horaSeleccionada, minutos] = hora.split(":").map(Number);
     const horaDecimal = horaSeleccionada + minutos / 60;
 
     if (horaDecimal < 8 || (horaDecimal >= 13 && horaDecimal < 14) || horaDecimal >= 20) {
         mensajeDiv.textContent = "El consultorio solo atiende de 8:00 a 13:00 y de 14:00 a 20:00.";
-        mensajeDiv.className = "error";
+        mensajeDiv.classList.add("error");
         return;
     }
 
@@ -50,7 +49,8 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
     const año = fechaSeleccionada.getFullYear();
 
     mensajeDiv.innerHTML = `¡Turno reservado con éxito para <strong>${nombre}</strong> el <strong>${dia}/${mes}/${año}</strong> a las <strong>${hora}</strong> hs!`;
-    mensajeDiv.className = "exito";
+    mensajeDiv.classList.add("exito");
 
     document.getElementById("form-turno").reset();
 });
+
