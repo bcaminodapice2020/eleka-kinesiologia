@@ -40,6 +40,13 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
+header, section, div {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
 section {
   padding: 2rem 1rem;
   margin: 1rem auto;
