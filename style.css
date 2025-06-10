@@ -147,3 +147,10 @@ footer {
     font-size: 1.25rem;
   }
 }
+h1, h2 {
+  text-align: center;
+}
+
+section p:first-of-type {
+  text-align: center;
+}
