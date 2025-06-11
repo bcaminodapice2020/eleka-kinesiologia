@@ -159,29 +159,3 @@ img {
     border: 1px solid #ef9a9a;
 }
 
-#btnVolverArriba {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 99;
-  font-size: 20px;
-  background-color: #a0d9c6;
-  color: white;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 12px 16px;
-  border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: opacity 0.3s ease;
-}
-
-#btnVolverArriba:hover {
-  background-color: #7ec7b1;
-}
-
-#btnVolverArriba.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
