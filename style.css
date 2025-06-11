@@ -1,4 +1,4 @@
-/* Reset de márgenes y paddings */
+
 * {
   margin: 0;
   padding: 0;
@@ -106,7 +106,6 @@ form button:hover {
   background-color: #303f9f;
 }
 
-/* Estilos para mensajes de confirmación y error */
 #mensaje-confirmacion {
   text-align: center;
   font-size: 18px;
