@@ -53,3 +53,18 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
 
     document.getElementById("form-turno").reset();
 });
+
+// Mostrar u ocultar el botón
+window.addEventListener("scroll", function() {
+    const btn = document.getElementById("btn-volver-arriba");
+    if (window.scrollY > 300) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
+    }
+});
+
+// Hacer scroll hacia arriba
+document.getElementById("btn-volver-arriba").addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
