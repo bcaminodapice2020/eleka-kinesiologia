@@ -198,3 +198,22 @@ img {
   color: #26a69a;
 }
 
+#servicios ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#servicios ul li {
+  position: relative;
+  padding-left: 1.8em;
+}
+
+#servicios ul li::before {
+  content: "🩺";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.2em;
+  color: #26a69a;
+}
+
