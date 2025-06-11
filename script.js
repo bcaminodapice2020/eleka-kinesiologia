@@ -53,3 +53,18 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
 
     document.getElementById("form-turno").reset();
 });
+
+const btnVolverArriba = document.getElementById("btnVolverArriba");
+
+window.onscroll = () => {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    btnVolverArriba.classList.remove("hidden");
+  } else {
+    btnVolverArriba.classList.add("hidden");
+  }
+};
+
+btnVolverArriba.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
