@@ -185,3 +185,13 @@ img {
   :contentReference[oaicite:4]{index=4}
   color: #26a69a;
 }
+
+#equipo ul li {
+  :contentReference[oaicite:6]{index=6}
+}
+
+#equipo ul li::marker {
+  content: "💪 ";
+  :contentReference[oaicite:7]{index=7}
+  color: #26a69a;
+}
