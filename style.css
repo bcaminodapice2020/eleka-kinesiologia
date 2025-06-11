@@ -132,3 +132,28 @@ img {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+/* Tipografía principal */
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Títulos elegantes */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: #2d2d2d;
+  font-weight: 700;
+}
+
+/* Opcional: letras más suaves para párrafos */
+p {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+/* También podés mejorar botones o formularios */
+button, input, label {
+  font-family: 'DM Sans', sans-serif;
+}
+
