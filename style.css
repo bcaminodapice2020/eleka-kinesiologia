@@ -179,19 +179,22 @@ img {
   background-color: #00796b;
 }
 
-#equipo ul li::marker {
-  :contentReference[oaicite:2]{index=2}
-  :contentReference[oaicite:3]{index=3}
-  :contentReference[oaicite:4]{index=4}
-  color: #26a69a;
+#equipo ul {
+  list-style: none;
+  padding-left: 0;
 }
 
 #equipo ul li {
-  :contentReference[oaicite:6]{index=6}
+  position: relative;
+  padding-left: 1.8em;
 }
 
-#equipo ul li::marker {
-  content: "💪 ";
-  :contentReference[oaicite:7]{index=7}
+#equipo ul li::before {
+  content: "💪";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.2em;
   color: #26a69a;
 }
+
