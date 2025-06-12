@@ -27,7 +27,7 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
         return;
     }
 
-    const diaSemana = fechaSeleccionada.getDay(); // 0 (Dom) a 6 (Sáb)
+    const diaSemana = fechaSeleccionada.getDay(); 
     if (diaSemana === 0 || diaSemana === 6) {
         mensajeDiv.textContent = "El consultorio está cerrado los fines de semana.";
         mensajeDiv.classList.add("error");
@@ -43,7 +43,7 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
         return;
     }
 
-    // Formato de fecha para el mensaje
+    
     const dia = fechaSeleccionada.getDate().toString().padStart(2, '0');
     const mes = (fechaSeleccionada.getMonth() + 1).toString().padStart(2, '0');
     const año = fechaSeleccionada.getFullYear();
@@ -54,16 +54,16 @@ document.getElementById("form-turno").addEventListener("submit", function(event)
     document.getElementById("form-turno").reset();
 });
 
-// Esperar a que se cargue todo el DOM
+
 document.addEventListener("DOMContentLoaded", () => {
   const scrollUp = document.getElementById("scroll-up");
 
-  // Mostrar/ocultar según scroll
+  
   window.addEventListener("scroll", () => {
     scrollUp.style.display = window.scrollY > 300 ? "block" : "none";
   });
 
-  // Scroll suave al top
+  
   scrollUp.addEventListener("click", (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
