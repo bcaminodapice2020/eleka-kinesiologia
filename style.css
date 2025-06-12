@@ -173,7 +173,7 @@ img {
   z-index: 1000;
   transition: background-color 0.3s, opacity 0.3s;
   
-  background-image: url("img/flecha.png"); 
+  background-image: url("img/flecha.jpeg"); 
   background-size: 50% 50%;
   background-repeat: no-repeat;
   background-position: center;
