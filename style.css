@@ -159,29 +159,24 @@ img {
     border: 1px solid #ef9a9a;
 }
 
-#scrollToTopBtn {
+#scroll-up {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #00897b; /* verde-teal */
+  bottom: 30px;
+  right: 30px;
+  background-color: #26a69a;
   color: white;
-  border: none;
-  padding: 0;
-  width: 56px;
-  height: 56px;
+  font-size: 24px;
+  padding: 10px;
   border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  display: none;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s, opacity 0.3s;
 }
-
-#scrollToTopBtn:hover {
-  background-color: #00695c;
-  transform: scale(1.05);
+#scroll-up:hover {
+  background-color: #00796b;
 }
 
 
