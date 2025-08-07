@@ -219,3 +219,44 @@ img {
   color: #26a69a;
 }
 
+/* --- Turnos reservados --- */
+#lista-turnos{
+  list-style:none;
+  padding-left:0;
+  max-width:500px;
+  margin:0 auto;
+}
+.turno-item{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  background:#f5f5f5;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:12px 16px;
+  margin-bottom:12px;
+  gap:8px;
+}
+.turno-item span{
+  flex:1 1 180px;
+}
+.turno-item button{
+  background:#26a69a;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:6px 10px;
+  cursor:pointer;
+  font-size:.9rem;
+}
+.turno-item button:hover{
+  background:#00796b;
+}
+.turno-item .eliminar{
+  background:#c62828;
+}
+.turno-item .eliminar:hover{
+  background:#8e0000;
+}
+
