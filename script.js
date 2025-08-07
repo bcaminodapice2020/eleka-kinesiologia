@@ -96,9 +96,15 @@ listaTurnos.addEventListener("click", e=>{
   const idx = e.target.dataset.idx;
   if(idx === undefined) return;
 
-  if(e.target.classList.contains("eliminar")){
-    turnos.splice(idx,1);
-    dibujarTurnos();
+  if (e.target.classList.contains("eliminar")){
+  turnos.splice(idx,1);
+  dibujarTurnos();
+    
+  // limpiar/ocultar el banner de confirmación
+  mensajeDiv.textContent = "";
+  mensajeDiv.className = "";
+  mensajeDiv.style.display = "none";
+  return;
   }else if(e.target.classList.contains("editar")){
     const t = turnos[idx];
     document.getElementById("nombre").value = t.nombre;
@@ -118,4 +124,5 @@ document.addEventListener("DOMContentLoaded",()=>{
     e.preventDefault(); window.scrollTo({top:0,behavior:"smooth"});
   });
 });
+
 
