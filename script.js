@@ -1,14 +1,14 @@
-// --- Estado de la app ---
-const turnos = [];        // Array de objetos {nombre,email,fechaISO,hora}
-let editIndex = -1;       // -1 = modo “crear”, >=0 = modo “editar”
 
-// --- Elementos del DOM ---
+const turnos = [];        
+let editIndex = -1;       
+
+
 const form = document.getElementById("form-turno");
 const listaTurnos = document.getElementById("lista-turnos");
 const tituloTurnos = document.getElementById("titulo-turnos");
 const mensajeDiv = document.getElementById("mensaje-confirmacion");
 
-// --- Utilidades de validación ---
+
 function validarTurno(nombre,email,fechaISO,hora){
   if(!nombre || !email || !fechaISO || !hora) return "Por favor, completá todos los campos.";
 
@@ -24,10 +24,10 @@ function validarTurno(nombre,email,fechaISO,hora){
   if(horaDec<8 || (horaDec>=13 && horaDec<14) || horaDec>=20)
     return "El consultorio solo atiende de 8:00 a 13:00 y de 14:00 a 20:00.";
 
-  return ""; // sin errores
+  return ""; 
 }
 
-// --- Renderiza la lista de turnos ---
+
 function dibujarTurnos(){
   listaTurnos.innerHTML = "";
   if(turnos.length===0){
@@ -54,7 +54,7 @@ function dibujarTurnos(){
   });
 }
 
-// --- Crear / actualizar turno ---
+
 form.addEventListener("submit", e=>{
   e.preventDefault();
   mensajeDiv.textContent=""; mensajeDiv.className=""; mensajeDiv.style.display="block";
@@ -72,10 +72,10 @@ form.addEventListener("submit", e=>{
   }
 
   if(editIndex === -1){
-    // Alta
+    
     turnos.push({nombre,email,fechaISO,hora});
   }else{
-    // Edición
+    
     turnos[editIndex] = {nombre,email,fechaISO,hora};
     editIndex = -1;
   }
@@ -91,7 +91,7 @@ form.addEventListener("submit", e=>{
   form.reset();
 });
 
-// --- Delegación para Editar / Eliminar ---
+
 listaTurnos.addEventListener("click", e=>{
   const idx = e.target.dataset.idx;
   if(idx === undefined) return;
@@ -100,7 +100,7 @@ listaTurnos.addEventListener("click", e=>{
   turnos.splice(idx,1);
   dibujarTurnos();
     
-  // limpiar/ocultar el banner de confirmación
+  
   mensajeDiv.textContent = "";
   mensajeDiv.className = "";
   mensajeDiv.style.display = "none";
@@ -116,7 +116,7 @@ listaTurnos.addEventListener("click", e=>{
   }
 });
 
-// --- Botón subir ---
+
 document.addEventListener("DOMContentLoaded",()=>{
   const scrollUp = document.getElementById("scroll-up");
   window.addEventListener("scroll",()=>{scrollUp.style.display = window.scrollY>300 ? "block":"none";});
@@ -124,5 +124,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     e.preventDefault(); window.scrollTo({top:0,behavior:"smooth"});
   });
 });
+
 
 
