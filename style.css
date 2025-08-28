@@ -219,7 +219,7 @@ img {
   color: #26a69a;
 }
 
-/* --- Turnos reservados --- */
+
 #lista-turnos{
   list-style:none;
   padding-left:0;
@@ -259,4 +259,5 @@ img {
 .turno-item .eliminar:hover{
   background:#8e0000;
 }
+
 
